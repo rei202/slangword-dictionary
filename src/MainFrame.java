@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -32,9 +33,14 @@ public class MainFrame extends JFrame implements ActionListener {
         // TODO: place custom component creation code here
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setContentPane(mainPanel);
-        setSize(700,400);
+        setSize(600,400);
+        setBounds(500,150,600,400);
         displaySlangWordsListButton.setActionCommand("Display");
         displaySlangWordsListButton.addActionListener(this);
+        findBySlangWordButton1.setActionCommand("findBySlangWord");
+        findBySlangWordButton1.addActionListener(this);
+        addNewSlangWordButton1.setActionCommand("add new slang word");
+        addNewSlangWordButton1.addActionListener(this);
         setVisible(true);
 
     }
@@ -54,16 +60,18 @@ public class MainFrame extends JFrame implements ActionListener {
             displayPanel displayPanel = new displayPanel(this.slangwordList, this, mainPanel);
             JPanel panel = displayPanel.fn();
             setContentPane(panel);
+            //invalidate();
+            validate();
+            //repaint();
+        }
+        else if (str.equals("findBySlangWord")) {
+            //......................
+            findBySlangWord findBySlangWord = new findBySlangWord(this.slangwordList, this, mainPanel);
+            JPanel panel = findBySlangWord.fn();
+            setContentPane(panel);
             invalidate();
             validate();
         }
-//        else if (str.equals("Add 1 Student")) {
-//            //......................
-//
-//            setContentPane(panel);
-//            invalidate();
-//            validate();
-//        }
 //        else if (str.equals("Delete 1 Student")) {
 //            //......................
 //
@@ -79,13 +87,15 @@ public class MainFrame extends JFrame implements ActionListener {
 //            invalidate();
 //            validate();
 //        }
-//        else if (str.equals("Display Student List")) {
-//            //......................
-//
-//            setContentPane(panel);
-//            invalidate();
-//            validate();
-//        }
+        else if (str.equals("add new slang word")) {
+            //......................
+            addSlangWordPanel addSlangWordPanel = new addSlangWordPanel(this.slangwordList, this, mainPanel);
+            JPanel panel = addSlangWordPanel.fn();
+            setContentPane(panel);
+            setSize(400,200);
+            invalidate();
+            validate();
+        }
 //        else if (str.equals("Export CSV")) {
 //            //......................
 //
