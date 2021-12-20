@@ -1,19 +1,18 @@
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class addSlangWordPanel implements ActionListener {
+public class updateSlangWordPanel implements ActionListener {
     private JPanel panel1;
-    private JTextField textField1;
     private JTextField textField2;
+    private JTextField textField1;
     private JButton previousButton;
-    private JButton addButton;
+    private JButton updateButton;
     private SlangWordList slangWordList;
     private JFrame rootFrame;
     private JPanel rootPanel;
 
-    public addSlangWordPanel(SlangWordList slangWordList, JFrame rootFrame, JPanel rootPanel) {
+    public updateSlangWordPanel(SlangWordList slangWordList, JFrame rootFrame, JPanel rootPanel) {
         this.slangWordList = slangWordList;
         this.rootFrame = rootFrame;
         this.rootPanel = rootPanel;
@@ -23,8 +22,8 @@ public class addSlangWordPanel implements ActionListener {
 
         previousButton.setActionCommand("previous");
         previousButton.addActionListener(this);
-        addButton.setActionCommand("add");
-        addButton.addActionListener(this);
+        updateButton.setActionCommand("update");
+        updateButton.addActionListener(this);
         return panel1;
     }
 
@@ -38,23 +37,16 @@ public class addSlangWordPanel implements ActionListener {
             rootFrame.invalidate();
             rootFrame.validate();
         }
-        else if(command.equals("add")) {
+        else if(command.equals("update")) {
             String slang = textField1.getText();
             String def = textField2.getText();
-            if(slangWordList.getList().get(slang) == null) {
+            if (slangWordList.getList().get(slang) != null) {
+                slangWordList.getList().remove(slang);
                 slangWordList.getList().put(slang, def);
                 JOptionPane.showMessageDialog(panel1, "Successfully");
-            }
-            else {
-                int res = JOptionPane.showOptionDialog(new JFrame(), "This slang word already exists. Do you want to overwrite?", "",
-                        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-                        new Object[]{"Overwrite", "No"}, JOptionPane.YES_OPTION);
-                if (res == JOptionPane.YES_OPTION) {
-                    slangWordList.getList().remove(slang);
-                    slangWordList.getList().put(slang, def);
-                }
-            }
+            } else
+                JOptionPane.showMessageDialog(panel1, "This slang word not exists");
+
         }
     }
-
 }

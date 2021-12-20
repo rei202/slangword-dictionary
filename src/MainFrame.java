@@ -37,10 +37,15 @@ public class MainFrame extends JFrame implements ActionListener {
         setBounds(500,150,600,400);
         displaySlangWordsListButton.setActionCommand("Display");
         displaySlangWordsListButton.addActionListener(this);
+
         findBySlangWordButton1.setActionCommand("findBySlangWord");
         findBySlangWordButton1.addActionListener(this);
+
         addNewSlangWordButton1.setActionCommand("add new slang word");
         addNewSlangWordButton1.addActionListener(this);
+
+        editSlangWordButton1.setActionCommand("edit slang word");
+        editSlangWordButton1.addActionListener(this);
 
         deleteSlangWordButton1.setActionCommand("delete slang word");
         deleteSlangWordButton1.addActionListener(this);
@@ -101,10 +106,14 @@ public class MainFrame extends JFrame implements ActionListener {
             invalidate();
             validate();
         }
-//        else if (str.equals("Export CSV")) {
-//            //......................
-//
-//        }
+        else if (str.equals("edit slang word")) {
+            updateSlangWordPanel updateSlangWordPanel = new updateSlangWordPanel(this.slangwordList, this, mainPanel);
+            JPanel panel = updateSlangWordPanel.fn();
+            setContentPane(panel);
+            setSize(400,200);
+            invalidate();
+            validate();
+        }
         else if (str.equals("delete slang word")) {
             //......................
             deleteSlangWord deleteSlangWord = new deleteSlangWord(this.slangwordList, this, mainPanel);
