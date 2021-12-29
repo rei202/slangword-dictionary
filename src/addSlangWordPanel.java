@@ -2,6 +2,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class addSlangWordPanel implements ActionListener {
     private JPanel panel1;
@@ -42,16 +44,24 @@ public class addSlangWordPanel implements ActionListener {
             String slang = textField1.getText();
             String def = textField2.getText();
             if(slangWordList.getList().get(slang) == null) {
-                slangWordList.getList().put(slang, def);
+                ArrayList listDef = new ArrayList<String>();
+                listDef.add(def);
+                slangWordList.getList().put(slang, listDef);
                 JOptionPane.showMessageDialog(panel1, "Successfully");
             }
             else {
                 int res = JOptionPane.showOptionDialog(new JFrame(), "This slang word already exists. Do you want to overwrite?", "",
-                        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-                        new Object[]{"Overwrite", "No"}, JOptionPane.YES_OPTION);
+                        JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                        new Object[]{"Overwrite", "Add definition", "Cancel"}, JOptionPane.YES_OPTION);
                 if (res == JOptionPane.YES_OPTION) {
                     slangWordList.getList().remove(slang);
-                    slangWordList.getList().put(slang, def);
+                    ArrayList listDef = new ArrayList<String>();
+                    listDef.add(def);
+                    slangWordList.getList().put(slang, listDef);
+                }
+                else if(res == JOptionPane.NO_OPTION){
+                    ArrayList listDef = slangWordList.getList().get(slang);
+                    listDef.add(def);
                 }
             }
         }

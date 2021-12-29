@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class updateSlangWordPanel implements ActionListener {
     private JPanel panel1;
@@ -42,7 +43,9 @@ public class updateSlangWordPanel implements ActionListener {
             String def = textField2.getText();
             if (slangWordList.getList().get(slang) != null) {
                 slangWordList.getList().remove(slang);
-                slangWordList.getList().put(slang, def);
+                ArrayList listDef = new ArrayList<String>();
+                listDef.add(def);
+                slangWordList.getList().put(slang, listDef);
                 JOptionPane.showMessageDialog(panel1, "Successfully");
             } else
                 JOptionPane.showMessageDialog(panel1, "This slang word not exists");

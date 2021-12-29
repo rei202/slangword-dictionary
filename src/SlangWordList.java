@@ -2,21 +2,22 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 public class SlangWordList {
-    private TreeMap<String, String> list;
+    private TreeMap<String, ArrayList<String>> list;
 
 
     public SlangWordList() {
         this.list = null;
     }
 
-    public TreeMap<String, String> getList() {
+    public TreeMap<String, ArrayList<String>> getList() {
         return list;
     }
 
-    public void setList(TreeMap<String, String> list) {
+    public void setList(TreeMap<String, ArrayList<String>> list) {
         this.list = list;
     }
 
@@ -30,7 +31,7 @@ public class SlangWordList {
             System.out.println("File Not Found");
             return;
         }
-
+        ArrayList<String> listDefinition;
         String str = br.readLine();
         while (true) {
             str = br.readLine();
@@ -39,7 +40,12 @@ public class SlangWordList {
             String[] temp = str.split("`");
             if(temp.length == 1)
                 continue;
-            list.put(temp[0], temp[1]);
+            String[] temp1 = temp[1].split("\\| ");
+            listDefinition = new ArrayList<>();
+            for (String e: temp1) {
+                listDefinition.add(e);
+            }
+            list.put(temp[0], listDefinition);
         }
     }
 }
