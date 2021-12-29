@@ -4,6 +4,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class deleteSlangWord implements ActionListener  {
     private JPanel panel1;
@@ -63,9 +64,19 @@ public class deleteSlangWord implements ActionListener  {
     private void showList(){
         String [] arr1,arr2;
         arr1 = slangWordList.getList().keySet().toArray(new String[0]);
-        arr2 =slangWordList.getList().values().toArray(new String[0]);
-        for (int i = 0; i < slangWordList.getList().size(); i++)
-            model.addRow(new Object[]{i, arr1[i], arr2[i]});
+
+        for (int i = 0; i < slangWordList.getList().size(); i++){
+            ArrayList<String> listDefinition = slangWordList.getList().get(arr1[i]);
+            String str = "";
+            for (int j = 0; j < listDefinition.size(); j++ ) {
+                if(j != listDefinition.size() - 1)
+                    str = str + listDefinition.get(j) + " | ";
+                else
+                    str = str + listDefinition.get(j);
+            }
+            model.addRow(new Object[]{i, arr1[i], str});
+        }
+
     }
     @Override
     public void actionPerformed(ActionEvent e) {
