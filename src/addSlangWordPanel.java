@@ -36,7 +36,7 @@ public class addSlangWordPanel implements ActionListener {
         String command = e.getActionCommand();
         if(command.equals("previous")) {
             rootFrame.setContentPane(rootPanel);
-            rootFrame.setSize(600,400);
+            rootFrame.setSize(600,600);
             rootFrame.invalidate();
             rootFrame.validate();
         }

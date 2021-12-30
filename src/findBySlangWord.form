@@ -33,21 +33,6 @@
           </component>
         </children>
       </grid>
-      <grid id="d1470" layout-manager="CardLayout" hgap="0" vgap="5">
-        <constraints border-constraint="South"/>
-        <properties/>
-        <border type="none"/>
-        <children>
-          <component id="37dc1" class="javax.swing.JButton" binding="previousButton" default-binding="true">
-            <constraints>
-              <card name="Card1"/>
-            </constraints>
-            <properties>
-              <text value="Previous"/>
-            </properties>
-          </component>
-        </children>
-      </grid>
       <scrollpane id="13289">
         <constraints border-constraint="Center"/>
         <properties/>
@@ -59,6 +44,19 @@
           </component>
         </children>
       </scrollpane>
+      <grid id="ab944" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints border-constraint="South"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="94002" class="javax.swing.JButton" binding="previousButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Previous"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
     </children>
   </grid>
 </form>

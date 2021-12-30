@@ -3,19 +3,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainFrame extends JFrame implements ActionListener {
     private JPanel mainPanel;
     private JButton displaySlangWordsListButton;
     private JButton findBySlangWordButton1;
-    private JButton findByDefinitionButton1;
-    private JButton funnyQuestionDefinitionButton;
     private JButton randomASlangWordButton1;
     private JButton editSlangWordButton1;
     private JButton addNewSlangWordButton1;
-    private JButton searchingHistoryButton1;
     private JButton resetSlangWordsListButton1;
     private JButton deleteSlangWordButton1;
+    private JLabel tittle;
+    private JButton findByDefinitionButton1;
+    private JButton funnyQuestionDefinitionButton;
+    private JButton searchingHistoryButton1;
     private JButton funnyQuestionSlangWordButton1;
 
     private SlangWordList slangwordList;
@@ -34,9 +36,11 @@ public class MainFrame extends JFrame implements ActionListener {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setContentPane(mainPanel);
         setSize(600,400);
-        setBounds(500,150,600,400);
+        setBounds(450,100,600,600);
         displaySlangWordsListButton.setActionCommand("Display");
         displaySlangWordsListButton.addActionListener(this);
+
+        tittle.setFont(new Font(Font.SANS_SERIF, Font.BOLD,30));
 
         findBySlangWordButton1.setActionCommand("findBySlangWord");
         findBySlangWordButton1.addActionListener(this);
@@ -49,6 +53,13 @@ public class MainFrame extends JFrame implements ActionListener {
 
         deleteSlangWordButton1.setActionCommand("delete slang word");
         deleteSlangWordButton1.addActionListener(this);
+
+        resetSlangWordsListButton1.setActionCommand("reset");
+        resetSlangWordsListButton1.addActionListener(this);
+
+        randomASlangWordButton1.setActionCommand("random");
+        randomASlangWordButton1.addActionListener(this);
+
         setVisible(true);
 
     }
@@ -69,7 +80,6 @@ public class MainFrame extends JFrame implements ActionListener {
             JPanel panel = displayPanel.fn();
             setContentPane(panel);
             setSize(700,400);
-
             //invalidate();
             validate();
             //repaint();
@@ -118,6 +128,28 @@ public class MainFrame extends JFrame implements ActionListener {
             //......................
             deleteSlangWord deleteSlangWord = new deleteSlangWord(this.slangwordList, this, mainPanel);
             JPanel panel = deleteSlangWord.fn();
+            setContentPane(panel);
+            setSize(700,400);
+            invalidate();
+            validate();
+        }
+        else if (str.equals("reset")) {
+            //......................
+            int res = JOptionPane.showOptionDialog(new JFrame(), "This slang word already exists. Do you want to overwrite?", "",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                    new Object[]{"Yes", "No"}, JOptionPane.YES_OPTION);
+            if (res == JOptionPane.YES_OPTION) {
+                try {
+                    slangwordList.importTxtFile("slang.txt");
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        else if (str.equals("random")) {
+            //......................
+            randomSlangWordPanel randomSlangWordPanel = new randomSlangWordPanel(this.slangwordList, this, mainPanel);
+            JPanel panel = randomSlangWordPanel.fn();
             setContentPane(panel);
             setSize(700,400);
             invalidate();
