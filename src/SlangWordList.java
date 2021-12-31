@@ -40,7 +40,7 @@ public class SlangWordList {
             String[] temp = str.split("`");
             if(temp.length == 1)
                 continue;
-            String[] temp1 = temp[1].split("\\| ");
+            String[] temp1 = temp[1].split("\\|");
             listDefinition = new ArrayList<>();
             for (String e: temp1) {
                 listDefinition.add(e);

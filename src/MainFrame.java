@@ -45,6 +45,9 @@ public class MainFrame extends JFrame implements ActionListener {
         findBySlangWordButton1.setActionCommand("findBySlangWord");
         findBySlangWordButton1.addActionListener(this);
 
+        findByDefinitionButton1.setActionCommand("findByDefinition");
+        findByDefinitionButton1.addActionListener(this);
+
         addNewSlangWordButton1.setActionCommand("add new slang word");
         addNewSlangWordButton1.addActionListener(this);
 
@@ -88,6 +91,14 @@ public class MainFrame extends JFrame implements ActionListener {
             //......................
             findBySlangWord findBySlangWord = new findBySlangWord(this.slangwordList, this, mainPanel);
             JPanel panel = findBySlangWord.fn();
+            setContentPane(panel);
+            invalidate();
+            validate();
+        }
+        else if (str.equals("findByDefinition")) {
+            //......................
+            findByDefinition findByDefinition = new findByDefinition(this.slangwordList, this, mainPanel);
+            JPanel panel = findByDefinition.fn();
             setContentPane(panel);
             invalidate();
             validate();
