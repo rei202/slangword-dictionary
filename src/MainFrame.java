@@ -63,6 +63,14 @@ public class MainFrame extends JFrame implements ActionListener {
         randomASlangWordButton1.setActionCommand("random");
         randomASlangWordButton1.addActionListener(this);
 
+        funnyQuestionSlangWordButton1.setActionCommand("funnyQuestionSlang");
+        funnyQuestionSlangWordButton1.addActionListener(this);
+
+        funnyQuestionDefinitionButton.setActionCommand("funnyQuestionDef");
+        funnyQuestionDefinitionButton.addActionListener(this);
+
+
+
         setVisible(true);
 
     }
@@ -161,6 +169,24 @@ public class MainFrame extends JFrame implements ActionListener {
             //......................
             randomSlangWordPanel randomSlangWordPanel = new randomSlangWordPanel(this.slangwordList, this, mainPanel);
             JPanel panel = randomSlangWordPanel.fn();
+            setContentPane(panel);
+            setSize(700,400);
+            invalidate();
+            validate();
+        }
+        else if (str.equals("funnyQuestionSlang")) {
+            //......................
+            funnyQuestionSlangPanel funnyQuestionSlangPanel = new funnyQuestionSlangPanel(this.slangwordList, this, mainPanel);
+            JPanel panel = funnyQuestionSlangPanel.fn();
+            setContentPane(panel);
+            setSize(700,400);
+            invalidate();
+            validate();
+        }
+        else if (str.equals("funnyQuestionDef")) {
+            //......................
+            funnyQuestionDefinition funnyQuestionDefinition = new funnyQuestionDefinition(this.slangwordList, this, mainPanel);
+            JPanel panel = funnyQuestionDefinition.fn();
             setContentPane(panel);
             setSize(700,400);
             invalidate();
