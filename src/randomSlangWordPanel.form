@@ -89,6 +89,12 @@
                   <text value="Previous"/>
                 </properties>
               </component>
+              <component id="f6ceb" class="javax.swing.JButton" binding="resetButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <text value="Reset"/>
+                </properties>
+              </component>
             </children>
           </grid>
         </children>

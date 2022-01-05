@@ -2,8 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Stack;
+import java.util.TreeMap;
 
 public class MainFrame extends JFrame implements ActionListener {
     private JPanel mainPanel;
@@ -21,6 +25,8 @@ public class MainFrame extends JFrame implements ActionListener {
     private JButton funnyQuestionSlangWordButton1;
 
     private SlangWordList slangwordList;
+    private ArrayList<String> history;
+
 
     public MainFrame() {
         slangwordList = new SlangWordList();
@@ -69,16 +75,86 @@ public class MainFrame extends JFrame implements ActionListener {
         funnyQuestionDefinitionButton.setActionCommand("funnyQuestionDef");
         funnyQuestionDefinitionButton.addActionListener(this);
 
+        searchingHistoryButton1.setActionCommand("history");
+        searchingHistoryButton1.addActionListener(this);
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                // Do what you want when the window is closing.
+                try {
+                    saveFile(slangwordList.getList(), "slangword.txt");
+                    saveHistory(history,"history.txt");
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
 
 
         setVisible(true);
 
     }
+
+    private void saveFile(TreeMap<String, ArrayList<String>> arr, String fileName) throws IOException {
+        BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
+        String [] arrKey = arr.keySet().toArray(new String[0]);
+        for (int i = 0; i < arrKey.length; i++) {
+            String str = "";
+            str = str + arrKey[i] + "`";
+            ArrayList<String> defOfKey = arr.get(arrKey[i]);
+            for (int j = 0; j < defOfKey.size(); j ++) {
+                if(j == defOfKey.size() - 1)
+                    str = str + defOfKey.get(j);
+                else
+                    str = str + defOfKey.get(j) + "|";
+
+            }
+            if(i == arrKey.length - 1)
+                bw.write(str);
+            else
+                bw.write(str + "\n");
+        }
+        bw.close();
+    }
+
+    private void saveHistory(ArrayList<String> arr, String fileName) throws IOException {
+        BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
+        for (int i = 0; i < history.size(); i++) {
+            if(i == history.size() - 1)
+                bw.write(history.get(i));
+            else
+                bw.write(history.get(i) + "\n");
+        }
+        bw.close();
+    }
+    public void loadHistory(String fileName) throws IOException {
+        history = new ArrayList<>();
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader(fileName));
+        }
+        catch(FileNotFoundException exc) {
+            System.out.println("File Not Found");
+            return;
+        }
+        ArrayList<String> listDefinition;
+        String str;
+        while (true) {
+            str = br.readLine();
+            if (str == null)
+                break;
+
+            history.add(str);
+        }
+        br.close();
+    }
+
     public static void main(String[] argv) throws IOException {
         MainFrame mainFrame = new MainFrame();
         mainFrame.createUI();
         mainFrame.getSlangwordList().importTxtFile("slang.txt");
-        String [] arr = mainFrame.getSlangwordList().getList().keySet().toArray(new String[0]);
+        mainFrame.loadHistory("history.txt");
 
     }
 
@@ -95,9 +171,19 @@ public class MainFrame extends JFrame implements ActionListener {
             validate();
             //repaint();
         }
+        if (str.equals("history")) {
+            //.....................
+            historyPanel historyPanel = new historyPanel(history, this, mainPanel);
+            JPanel panel = historyPanel.fn();
+            setContentPane(panel);
+            setSize(600,600);
+            //invalidate();
+            validate();
+            //repaint();
+        }
         else if (str.equals("findBySlangWord")) {
             //......................
-            findBySlangWord findBySlangWord = new findBySlangWord(this.slangwordList, this, mainPanel);
+            findBySlangWord findBySlangWord = new findBySlangWord(this.slangwordList, history,this, mainPanel);
             JPanel panel = findBySlangWord.fn();
             setContentPane(panel);
             invalidate();
@@ -159,7 +245,7 @@ public class MainFrame extends JFrame implements ActionListener {
                     new Object[]{"Yes", "No"}, JOptionPane.YES_OPTION);
             if (res == JOptionPane.YES_OPTION) {
                 try {
-                    slangwordList.importTxtFile("slang.txt");
+                    slangwordList.importTxtFile("slangSource.txt");
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }

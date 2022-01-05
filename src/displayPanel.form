@@ -32,6 +32,7 @@
               <card name="Card1"/>
             </constraints>
             <properties>
+              <font size="20"/>
               <horizontalAlignment value="0"/>
               <horizontalTextPosition value="0"/>
               <text value="Slang Words List"/>

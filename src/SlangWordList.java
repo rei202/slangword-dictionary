@@ -47,5 +47,6 @@ public class SlangWordList {
             }
             list.put(temp[0], listDefinition);
         }
+        br.close();
     }
 }

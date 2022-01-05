@@ -2,6 +2,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Stack;
 
 public class findBySlangWord implements ActionListener {
     private JPanel panel1;
@@ -13,11 +15,13 @@ public class findBySlangWord implements ActionListener {
     private JFrame rootFrame;
     private JPanel rootPanel;
     private DefaultTableModel model;
+    private ArrayList<String> history;
 
-    public findBySlangWord(SlangWordList slangWordList, JFrame rootFrame, JPanel rootPanel) {
+    public findBySlangWord(SlangWordList slangWordList, ArrayList<String> history, JFrame rootFrame, JPanel rootPanel) {
         this.slangWordList = slangWordList;
         this.rootFrame = rootFrame;
         this.rootPanel = rootPanel;
+        this.history = history;
     }
 
     public JPanel fn(){
@@ -45,11 +49,15 @@ public class findBySlangWord implements ActionListener {
         }
         else if(command.equals("find")){
             String strSearch = findBySlangWordTextField.getText();
+            if(strSearch != "")
+                history.add(strSearch);
             for(int i = model.getRowCount() - 1; i >= 0 ; i--){
                 model.removeRow(i);
             }
-            if(slangWordList.getList().get(strSearch) != null)
-                model.addRow(new Object[]{strSearch,slangWordList.getList().get(strSearch)});
+            if(slangWordList.getList().get(strSearch) != null) {
+                model.addRow(new Object[]{strSearch, slangWordList.getList().get(strSearch)});
+
+            }
         }
     }
 }

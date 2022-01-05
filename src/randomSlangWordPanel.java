@@ -12,6 +12,7 @@ public class randomSlangWordPanel implements ActionListener {
     private JLabel defLabel;
     private JLabel tittle;
     private JPanel centerPan;
+    private JButton resetButton;
     private SlangWordList slangWordList;
     private JFrame rootFrame;
     private JPanel rootPanel;
@@ -27,6 +28,13 @@ public class randomSlangWordPanel implements ActionListener {
         centerPan.setBorder(BorderFactory.createRaisedBevelBorder());
         previousButton.setActionCommand("previous");
         previousButton.addActionListener(this);
+        resetButton.setActionCommand("reset");
+        resetButton.addActionListener(this);
+        random();
+
+        return panel1;
+    }
+    private void random(){
         String [] randomKey = slangWordList.getList().keySet().toArray(new String[0]);
         Random randomGenerator = new Random();
         int randomIndex = randomGenerator.nextInt(randomKey.length);
@@ -45,9 +53,7 @@ public class randomSlangWordPanel implements ActionListener {
 
         defLabel.setText("It means: " + defString);
         defLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
-        return panel1;
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -57,6 +63,9 @@ public class randomSlangWordPanel implements ActionListener {
             rootFrame.setSize(600,600);
             rootFrame.invalidate();
             rootFrame.validate();
+        }
+        else if(command.equals("reset")) {
+            random();
         }
     }
 }

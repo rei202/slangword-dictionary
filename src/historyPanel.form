@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="historyPanel">
+  <grid id="27dc6" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="679" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="49937" binding="panel1" default-binding="true" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="6cd2c" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints border-constraint="South"/>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="edf0c" class="javax.swing.JButton" binding="previousButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <text value="Previous"/>
+                </properties>
+              </component>
+              <component id="2f0b8" class="javax.swing.JButton" binding="reset">
+                <constraints/>
+                <properties>
+                  <text value="Reset history"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="4ec50" layout-manager="CardLayout" hgap="0" vgap="10">
+            <constraints border-constraint="North"/>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="13d95" class="javax.swing.JLabel">
+                <constraints>
+                  <card name="Card1"/>
+                </constraints>
+                <properties>
+                  <font size="20"/>
+                  <horizontalAlignment value="0"/>
+                  <horizontalTextPosition value="0"/>
+                  <text value="Slangword search history"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <scrollpane id="4ccd7">
+            <constraints border-constraint="Center"/>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="182f3" class="javax.swing.JList" binding="list1" default-binding="true">
+                <constraints/>
+                <properties>
+                  <font size="16"/>
+                </properties>
+              </component>
+            </children>
+          </scrollpane>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>

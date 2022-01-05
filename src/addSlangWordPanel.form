@@ -55,6 +55,7 @@
               <component id="f47fb" class="javax.swing.JLabel">
                 <constraints border-constraint="Center"/>
                 <properties>
+                  <font size="20"/>
                   <horizontalAlignment value="0"/>
                   <horizontalTextPosition value="0"/>
                   <text value="Add new slang word"/>

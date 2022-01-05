@@ -3,6 +3,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class findByDefinition implements ActionListener {
     private JPanel panel1;
@@ -15,7 +16,7 @@ public class findByDefinition implements ActionListener {
     private JPanel rootPanel;
     private DefaultTableModel model;
 
-    public findByDefinition(SlangWordList slangWordList, JFrame rootFrame, JPanel rootPanel) {
+    public findByDefinition(SlangWordList slangWordList,JFrame rootFrame, JPanel rootPanel) {
         this.slangWordList = slangWordList;
         this.rootFrame = rootFrame;
         this.rootPanel = rootPanel;
