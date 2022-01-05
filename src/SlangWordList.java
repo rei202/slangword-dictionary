@@ -32,7 +32,7 @@ public class SlangWordList {
             return;
         }
         ArrayList<String> listDefinition;
-        String str = br.readLine();
+        String str;
         while (true) {
             str = br.readLine();
             if (str == null)

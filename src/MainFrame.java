@@ -37,7 +37,7 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
 
-    private void createUI() {
+    void createUI() {
         // TODO: place custom component creation code here
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setContentPane(mainPanel);
@@ -82,7 +82,7 @@ public class MainFrame extends JFrame implements ActionListener {
             public void windowClosing(WindowEvent e) {
                 // Do what you want when the window is closing.
                 try {
-                    saveFile(slangwordList.getList(), "slangword.txt");
+                    saveFile(slangwordList.getList(), "slang.txt");
                     saveHistory(history,"history.txt");
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -150,13 +150,7 @@ public class MainFrame extends JFrame implements ActionListener {
         br.close();
     }
 
-    public static void main(String[] argv) throws IOException {
-        MainFrame mainFrame = new MainFrame();
-        mainFrame.createUI();
-        mainFrame.getSlangwordList().importTxtFile("slang.txt");
-        mainFrame.loadHistory("history.txt");
 
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

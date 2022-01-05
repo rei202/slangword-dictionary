@@ -47,6 +47,7 @@ public class deleteSlangWord implements ActionListener  {
                             new Object[] { "Yes", "No" }, JOptionPane.YES_OPTION);
                     if (res == JOptionPane.YES_OPTION) {
                         int pos = table1.getSelectedRow();
+                        System.out.println(table1.getValueAt(pos, 1).toString());
                         slangWordList.getList().remove(table1.getValueAt(pos, 1).toString());
                         System.out.println(pos);
                         model.removeRow(pos);
